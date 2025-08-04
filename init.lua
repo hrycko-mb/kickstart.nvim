@@ -217,7 +217,7 @@ vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next centered' })
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previos centered' })
 
 vim.api.nvim_create_user_command('UA', function()
-  vim.o.keymap = 'ukrainian-jcuken-macos'
+  vim.o.keymap = 'ukrainian-jcuken-mac'
   vim.o.spelllang = 'ua'
   vim.cmd 'language uk_UA.UTF-8'
 end, {})
@@ -1065,7 +1065,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-
+  --
+  { 'hrycko-mb/nvim-ukrainian-jcuken-mac-keymap', version = '1.0.0' },
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --

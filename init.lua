@@ -204,7 +204,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Custom
-vim.keymap.set({ 'n', 'i', 'v' }, 'C-c', '<ESC>', { desc = 'Make Ctrl-C same as ESC' })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-c>', '<ESC>', { desc = 'Make Ctrl-C same as ESC' })
 
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selected line up' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selected line down' })
@@ -239,6 +239,21 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.hl.on_yank()
+  end,
+})
+
+-- unset relative numbers in insert mode
+vim.api.nvim_create_augroup('numbertoggle', { clear = true })
+vim.api.nvim_create_autocmd('InsertEnter', {
+  group = 'numbertoggle',
+  callback = function()
+    vim.opt.relativenumber = false
+  end,
+})
+vim.api.nvim_create_autocmd('InsertLeave', {
+  group = 'numbertoggle',
+  callback = function()
+    vim.opt.relativenumber = true
   end,
 })
 
@@ -1067,7 +1082,13 @@ require('lazy').setup({
   require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   --
-  { 'hrycko-mb/nvim-ukrainian-jcuken-mac-keymap', version = '1.0.0' },
+  {
+    'hrycko-mb/nvim-ukrainian-jcuken-mac-keymap',
+    version = '1.0.0',
+    cond = function()
+      return vim.loop.os_uname().sysname == 'Darwin'
+    end,
+  },
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --

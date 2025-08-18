@@ -216,17 +216,19 @@ vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Append next line' })
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next centered' })
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previos centered' })
 
-vim.api.nvim_create_user_command('UA', function()
-  vim.o.keymap = 'ukrainian-jcuken-mac'
-  vim.o.spelllang = 'ua'
-  vim.cmd 'language uk_UA.UTF-8'
-end, {})
+if vim.loop.os_uname().sysname == 'Darwin' then
+  vim.api.nvim_create_user_command('UA', function()
+    vim.o.keymap = 'ukrainian-jcuken-mac'
+    vim.o.spelllang = 'ua'
+    vim.cmd 'language uk_UA.UTF-8'
+  end, {})
 
-vim.api.nvim_create_user_command('EN', function()
-  vim.o.keymap = ''
-  vim.o.spelllang = 'en_us'
-  vim.cmd 'language en_US.UTF-8'
-end, {})
+  vim.api.nvim_create_user_command('EN', function()
+    vim.o.keymap = ''
+    vim.o.spelllang = 'en_us'
+    vim.cmd 'language en_US.UTF-8'
+  end, {})
+end
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

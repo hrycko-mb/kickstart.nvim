@@ -772,6 +772,16 @@ require('lazy').setup({
             },
           },
         },
+        robotframework_ls = {
+          settings = {
+            robot = {
+              -- ['language-server'] = {
+              --   python = 'python3',
+              -- },
+              pythonpath = {'${VIRTUAL_ENV}/lib/python3.11/site-packages/'}
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
